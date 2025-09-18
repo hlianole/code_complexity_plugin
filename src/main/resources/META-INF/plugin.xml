@@ -1,0 +1,44 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>com.hlianole.codecomplexity</id>
+    <name>Code Complexity Analyzer</name>
+    <version>0.0.1</version>
+    <vendor email="kneck3@gmail.com">Oleksandr Hliantsev</vendor>
+
+    <description>
+        Analyses code complexity: Cyclomatic complexity and Maintainability index
+    </description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <resource-bundle>messages.MyBundle</resource-bundle>
+
+    <application-components>
+        <component>
+            <implementation-class>com.hlianole.codecomplexity.settings.Settings</implementation-class>
+        </component>
+    </application-components>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <annotator language="JAVA" implementationClass="com.hlianole.codecomplexity.annotator.ComplexityAnnotator"/>
+
+        <applicationConfigurable
+            parentId="otherSettings"
+            instance="com.hlianole.codecomplexity.settings.SettingsConfigurable"
+            id="code.complexity.settings"
+            displayName="Code Complexity Analyzer"
+        />
+    </extensions>
+
+    <actions>
+        <action
+                id="AnalyzeMethodAction"
+                class="com.hlianole.codecomplexity.action.AnalyzeMethodAction"
+                text="Analyze Code Complexity"
+                description="Show complexity metrics for this methode">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>

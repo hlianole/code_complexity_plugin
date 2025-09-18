@@ -1,0 +1,9 @@
+[versions]
+intelliJPlatform = "2.7.1"
+lombok = "1.18.30"
+
+[libraries]
+lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
+
+[plugins]
+intelliJPlatform = { id = "org.jetbrains.intellij.platform", version.ref = "intelliJPlatform" }
