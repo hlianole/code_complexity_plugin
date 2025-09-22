@@ -19,7 +19,7 @@ public class AnalyzeMethodAction extends AnAction {
         PsiElement element = anActionEvent.getData(CommonDataKeys.PSI_ELEMENT);
         if (element instanceof PsiMethod method) {
             CodeAnalyzer analyzer = new CodeAnalyzer();
-            AnalysisActionResult result = analyzer.analyseAction(method);
+            AnalysisActionResult result = analyzer.analyzeAction(method);
 
             String message = Bundle.get("analyze.message",
                     result.cyclomaticComplexity(),

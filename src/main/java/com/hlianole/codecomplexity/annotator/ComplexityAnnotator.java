@@ -12,6 +12,7 @@ import com.intellij.psi.PsiMethod;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 import static com.hlianole.codecomplexity.constants.ComplexityConstants.*;
 import static com.hlianole.codecomplexity.constants.TextAttributeKeys.HIGH_COMPLEXITY_KEY;
@@ -19,7 +20,17 @@ import static com.hlianole.codecomplexity.constants.TextAttributeKeys.MEDIUM_COM
 
 public class ComplexityAnnotator implements Annotator {
 
-    private final CodeAnalyzer analyzer = new CodeAnalyzer();
+    private final CodeAnalyzer analyzer;
+    private final Supplier<Settings> settingsSupplier;
+
+    public ComplexityAnnotator() {
+        this(Settings.getInstance());
+    }
+
+    public ComplexityAnnotator(Settings settings) {
+        this.analyzer = new CodeAnalyzer();
+        this.settingsSupplier = () -> settings;
+    }
 
     @Override
     public void annotate(@NotNull PsiElement psiElement, @NotNull AnnotationHolder annotationHolder) {
@@ -30,8 +41,8 @@ public class ComplexityAnnotator implements Annotator {
                 return;
             }
 
-            AnalysisStaticResult analysisResult = analyzer.analyseStatic(psiMethod);
-            Settings settings = Settings.getInstance();
+            AnalysisStaticResult analysisResult = analyzer.analyzeStatic(psiMethod);
+            Settings settings = settingsSupplier.get();
 
             if (settings.enableCCHighlighting) {
                 annotateCC(annotationHolder, psiMethod, analysisResult);

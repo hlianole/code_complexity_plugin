@@ -2,7 +2,7 @@
 <idea-plugin>
     <id>com.hlianole.codecomplexity</id>
     <name>Code Complexity Analyzer</name>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
     <vendor email="kneck3@gmail.com">Oleksandr Hliantsev</vendor>
 
     <description>

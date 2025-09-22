@@ -10,8 +10,7 @@ import java.util.Arrays;
 
 public class CodeAnalyzer {
 
-    public @NotNull AnalysisActionResult analyseAction(@NotNull PsiMethod method) {
-        System.out.println("Analysing (action) " + method.getName());
+    public @NotNull AnalysisActionResult analyzeAction(@NotNull PsiMethod method) {
         PsiCodeBlock body = method.getBody();
         if (body == null) {
             return AnalysisActionResult.emptyBody();
@@ -26,8 +25,7 @@ public class CodeAnalyzer {
         return new AnalysisActionResult(cyclomaticComplexity, maintainabilityIndex, physicalLinesCount, logicalLinesCount);
     }
 
-    public @NotNull AnalysisStaticResult analyseStatic(@NotNull PsiMethod method) {
-        System.out.println("Analysing (static) " + method.getName());
+    public @NotNull AnalysisStaticResult analyzeStatic(@NotNull PsiMethod method) {
         PsiCodeBlock body = method.getBody();
         if (body == null) {
             return AnalysisStaticResult.emptyBody();

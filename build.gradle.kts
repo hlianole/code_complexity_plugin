@@ -30,6 +30,9 @@ dependencies {
 
         testFramework(TestFrameworkType.Platform)
     }
+
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:5.5.0")
 }
 
 intellijPlatform {
@@ -48,5 +51,9 @@ intellijPlatform {
 tasks {
     wrapper {
         gradleVersion = providers.gradleProperty("gradleVersion").get()
+    }
+
+    test {
+        //useJUnitPlatform()
     }
 }
