@@ -1,0 +1,19 @@
+version: "1.0"
+
+projectJDK: "21"
+
+profile:
+  name: qodana.starter
+
+include:
+  - name: CheckDependencyLicenses
+
+exclude:
+  - name: Annotator
+  - name: TodoComment
+  - name: UnusedImport
+
+bootstrap: |
+  echo "Bootstrap script for Qodana"
+
+failThreshold: 0

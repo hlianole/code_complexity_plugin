@@ -46,6 +46,14 @@ intellijPlatform {
             sinceBuild = providers.gradleProperty("pluginSinceBuild")
         }
     }
+    pluginVerification {
+        ides {
+            recommended()
+        }
+        freeArgs = listOf(
+            "-mute", "TemplateWordInPluginId,ForbiddenPluginIdPrefix"
+        )
+    }
 }
 
 tasks {
