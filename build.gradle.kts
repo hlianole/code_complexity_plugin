@@ -3,6 +3,7 @@ import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 plugins {
     id("java")
     alias(libs.plugins.intelliJPlatform)
+    alias(libs.plugins.changelog)
 }
 
 group = providers.gradleProperty("pluginGroup").get()
@@ -35,6 +36,12 @@ dependencies {
     testImplementation("org.mockito:mockito-core:5.5.0")
 }
 
+changelog {
+    groups.empty()
+    repositoryUrl = providers.gradleProperty("pluginRepositoryUrl")
+    version = providers.gradleProperty("pluginVersion")
+}
+
 intellijPlatform {
     pluginConfiguration {
         name = providers.gradleProperty("pluginName")
@@ -55,6 +62,13 @@ intellijPlatform {
         ideaVersion {
             sinceBuild = providers.gradleProperty("pluginSinceBuild")
             untilBuild = providers.gradleProperty("pluginUntilBuild")
+        }
+
+        changeNotes = provider {
+            changelog.renderItem(
+                changelog.getOrNull(providers.gradleProperty("pluginVersion").get())
+                    ?: changelog.getUnreleased()
+            )
         }
     }
 
@@ -91,5 +105,14 @@ tasks {
 
     test {
         //useJUnitPlatform()
+    }
+
+    patchPluginXml {
+        changeNotes = provider {
+            changelog.renderItem(
+                changelog.getOrNull(providers.gradleProperty("pluginVersion").get())
+                    ?: changelog.getUnreleased()
+            )
+        }
     }
 }
