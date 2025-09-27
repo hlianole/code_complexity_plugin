@@ -1,4 +1,4 @@
-rootProject.name = "Java Code Complexity Analyzer"
+rootProject.name = "Code Complexity Analyzer"
 
 pluginManagement {
     repositories {
