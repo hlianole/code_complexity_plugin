@@ -67,7 +67,9 @@ intellijPlatform {
             "TemplateWordInPluginId",
             "ForbiddenPluginIdPrefix",
             "PluginNeverLoaded",
-            "MissingDependency"
+            "MissingDependency",
+            "InvalidPlugin",
+            "NotFound"
         )
     }
 
