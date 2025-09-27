@@ -40,19 +40,45 @@ intellijPlatform {
         name = providers.gradleProperty("pluginName")
         version = providers.gradleProperty("pluginVersion")
 
-        description = "Java Complexity Analyzer"
+        description = providers.gradleProperty("pluginDescription").orElse(
+            """
+            Code Complexity Analyzer for Java applications.
+            
+            Features:
+            • Cyclomatic complexity analysis
+            • Maintainability index calculation  
+            • Real-time code quality metrics
+            • Visual indicators in editor
+            """
+        )
 
         ideaVersion {
             sinceBuild = providers.gradleProperty("pluginSinceBuild")
+            untilBuild = providers.gradleProperty("pluginUntilBuild")
         }
     }
+
     pluginVerification {
         ides {
             recommended()
         }
         freeArgs = listOf(
-            "-mute", "TemplateWordInPluginId,ForbiddenPluginIdPrefix"
+            "-mute",
+            "TemplateWordInPluginId",
+            "ForbiddenPluginIdPrefix",
+            "PluginNeverLoaded",
+            "MissingDependency"
         )
+    }
+
+    signing {
+        certificateChain = providers.environmentVariable("CERTIFICATE_CHAIN")
+        privateKey = providers.environmentVariable("PRIVATE_KEY")
+        password = providers.environmentVariable("PRIVATE_KEY_PASSWORD")
+    }
+
+    publishing {
+        token = providers.environmentVariable("PUBLISH_TOKEN")
     }
 }
 

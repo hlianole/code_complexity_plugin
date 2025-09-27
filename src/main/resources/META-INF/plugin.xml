@@ -5,9 +5,28 @@
     <version>1.0.0</version>
     <vendor email="kneck3@gmail.com">Oleksandr Hliantsev</vendor>
 
-    <description>
-        Analyses code complexity: Cyclomatic complexity and Maintainability index
-    </description>
+    <description><![CDATA[
+        <h2>Code Complexity Analyzer</h2>
+        <p>Advanced code quality analysis tool for Java applications.</p>
+
+        <h3>Features:</h3>
+        <ul>
+            <li><strong>Cyclomatic Complexity</strong> - Measure code branching complexity</li>
+            <li><strong>Maintainability Index</strong> - Calculate code maintainability score</li>
+            <li><strong>Real-time Analysis</strong> - Get instant feedback as you code</li>
+            <li><strong>Visual Indicators</strong> - See complexity metrics directly in editor</li>
+        </ul>
+
+        <h3>How to use:</h3>
+        <ul>
+            <li>Open any Java file</li>
+            <li>Right-click on a method → "Analyze Code Complexity"</li>
+        </ul>
+
+        <p>Perfect for maintaining code quality in large Java projects!</p>
+    ]]></description>
+
+    <idea-version since-build="231" until-build="241.*"/>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
@@ -15,21 +34,20 @@
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
-    <application-components>
-        <component>
-            <implementation-class>com.hlianole.codecomplexity.settings.Settings</implementation-class>
-        </component>
-    </application-components>
-
     <extensions defaultExtensionNs="com.intellij">
-        <annotator language="JAVA" implementationClass="com.hlianole.codecomplexity.annotator.ComplexityAnnotator"/>
+        <applicationService
+                serviceImplementation="com.hlianole.codecomplexity.settings.Settings"/>
+
+        <annotator
+                language="JAVA"
+                implementationClass="com.hlianole.codecomplexity.annotator.ComplexityAnnotator"/>
 
         <applicationConfigurable
-            parentId="otherSettings"
-            instance="com.hlianole.codecomplexity.settings.SettingsConfigurable"
-            id="code.complexity.settings"
-            displayName="Code Complexity Analyzer"
-        />
+                parentId="tools"
+                instance="com.hlianole.codecomplexity.settings.SettingsConfigurable"
+                id="code.complexity.settings"
+                displayName="Code Complexity Analyzer"
+                groupId="settings"/>
     </extensions>
 
     <actions>
